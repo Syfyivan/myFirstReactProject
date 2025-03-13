@@ -1,0 +1,34 @@
+{
+  "users": [
+    {
+      "username": "admin",
+      "password": "admin0",
+      "role": "admin0",
+      "email": "admin@example.com0",
+      "account": "admin0",
+      "id": "efb7"
+    },
+    {
+      "username": "admin1",
+      "password": "admin1",
+      "role": "admin1",
+      "email": "admin@example.com1",
+      "account": "admin1",
+      "id": "d6ab"
+    },
+    {
+      "id": "3c02",
+      "username": "111",
+      "password": "111",
+      "email": "1111",
+      "role": "admin1"
+    },
+    {
+      "id": "845e",
+      "username": "111",
+      "password": "111",
+      "email": "1111",
+      "role": "admin1"
+    }
+  ]
+}
