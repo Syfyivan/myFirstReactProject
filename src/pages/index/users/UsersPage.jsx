@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react'
 import { deleteUserApi, getUSersApi, postUserApi, updateUserApi } from '../../../api/users';
-import { getRolesApi } from '../../../api/roles';
+// import { getRolesApi } from '../../../api/roles';
 import { Popconfirm, Space, Table, Tag,  Button, Divider, Modal, Form, Input, Select, message } from 'antd';
-import { data } from 'react-router-dom';
+// import { data } from 'react-router-dom';
 
 const UsersPage = () => {
     const columns = [
@@ -56,24 +56,24 @@ const UsersPage = () => {
     const [usersData, setUsersData] = useState([]);
     // 控制添加用户弹窗的显示与隐藏
     const [addOpen, setAddOpen] = useState(false);
-    const [roles, setRoles] = useState([]);
-    // const [addData, setAddData] = useState([]);
+    // const [roles, setRoles] = useState([]);
+
     const [addData, setAddData] = useState({}); // 使用对象来存储表单数据
     //控制修改用户的弹窗状态
     const [editOpen, setEditOpen] = useState(false);
     // 控制修改用户的数据
-    const [updateData, setUpdateData] = useState({});
+    const [updateData, setUpdateData] = useState([]);
     const [form] = Form.useForm(); // 使用form来获取表单数据
 
     useEffect(() => {
         getUsers();    
-        getRoles();
+        // getRoles();
     }, []);
 
     // 获取用户数据
     const getUsers = async () => {
         const res = await getUSersApi();
-        console.log(res.data);
+        console.log('res.data(getUsersApi)',res.data);
         setUsersData(res.data);
     }
     // 删除用户
@@ -84,29 +84,30 @@ const UsersPage = () => {
         // 删除成功后重新获取用户数据
         getUsers();
     }
-    // 获取角色
-    const getRoles = async () => {
-        const res = await getRolesApi();
-        // console.log('角色', res.data);
-        if (res.code) {
-            console.log('res.data', res.data);
-            console.log('roles', roles);
-        setRoles(res.data);
+    // // 获取角色
+    // const getRoles = async (id) => {
+    //     const res = await getRolesApi();
+    //     console.log('res(getRolesApi)', res);
+    //     console.log('角色', res.data);
+    //     if (res.status === 200) {
+    //         console.log('res.data.name', res.data.name);
+    //         console.log('roles', roles);
+    //         const role = res.data.roles[id];
+    //         console.log('role', role);
+    //     setRoles(res.data);
         
-        }
-      
-    }
+    //     }
+    // }
     // 确认添加用户
     const addUser = async () => {
         console.log('addData1', addData);
         const res =  await postUserApi(addData); // 发送请求添加用户
         // console.log('res.status', res.status);
         console.log('res(addUser)', res);
-        if (res.code === 201) {
+        if (res.status === 201) {
             message.success('添加用户成功');
             setAddOpen(false);
-            getUsers();
-            
+            getUsers();  
         }
         
     }
@@ -123,25 +124,40 @@ const UsersPage = () => {
    
     }
     
-    // 用户在操作修改表单的过程中触发
-    const onValuesChange = (changedValues, allValues) => {
-        // console.log('changedValues', changedValues, 'allValues', allValues);
-        setUpdateData(allValues);
-    }
+   
     // 点击修改, 打开弹窗, 获取并渲染修改用户数据
     const getUpdateUser = (updateData) => {
+        console.log('updateData(getUpdateUser)', updateData);
         setUpdateData(updateData); // 获取修改用户数据, 只是改变了数据, 表单的默认值不会更新
-        form.setFieldsValue(updateData); // 设置表单的默认值
+        form.setFieldsValue(
+            {
+                username: updateData.username,
+                password: updateData.password,
+                email: updateData.email,
+                role: updateData.role,
+                id: updateData.id
+            }
+        ); // 设置表单的默认值
         setEditOpen(true);
+    }
+     // 用户在操作修改表单的过程中触发
+     const onValuesChange = (changedValues, allValues) => {
+        console.log('changedValues(Update)', changedValues, 'allValues(Update)', allValues);
+        console.log('id(update)', updateData.id);
+        setUpdateData({...updateData,...allValues});
+        console.log('updateData(onValuesChange)', updateData);
     }
     // 确认修改用户
     const editUser = async () => {
-        console.log('updateData', updateData);
+        console.log('updateData(editUser)', updateData);
         const res = await updateUserApi(updateData.id, updateData);
         console.log('updateData2', updateData);
         console.log('updateres', res);
-        getUsers();
-        setEditOpen(false);
+        if (res.status === 200) {
+            getUsers();
+            setEditOpen(false);
+        }
+        
         
     }
 

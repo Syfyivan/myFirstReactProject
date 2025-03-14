@@ -8,10 +8,13 @@ import UsersPage from './pages/index/users/UsersPage'
 import RolesPage from './pages/index/roles/RolesPage'
 import ProductsCategory from './pages/index/products/ProductsCategory'
 import ProductsList from './pages/index/products/ProductsList'
+import ProductsUpdate from './pages/index/products/ProductsUpdate'
 
 const NotFound = lazy(() => import('./pages/404/NotFound'))
 
 const App = () => {
+
+
   return (
     <Suspense fallback={<div>Loading...</div>}>
        <BrowserRouter>
@@ -27,7 +30,9 @@ const App = () => {
             {/* <Route path='products' element={<ProductsPage />}></Route> */}
             <Route path='products/category' element={<ProductsCategory />}></Route>
             <Route path='products/list' element={<ProductsList />}></Route>
-            {/* 这些都是同级路由，后面这两个斜线不是嵌套*/}
+            <Route path='products/update/:productId' element={<ProductsUpdate />}></Route>  
+            {/* <Route path='products/update' element={<ProductsUpdate />}></Route>  state 传参 */}
+            {/* 这些都是同级路由，后面这三个的斜线不是嵌套*/}
           </Route>
           <Route path='*' element={<NotFound />}></Route>
         </Routes>

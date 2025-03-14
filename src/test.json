@@ -3,32 +3,106 @@
     {
       "username": "admin",
       "password": "admin0",
-      "role": "admin0",
+      "role": "menager",
       "email": "admin@example.com0",
       "account": "admin0",
-      "id": "efb7"
+      "id": "1"
     },
     {
       "username": "admin1",
       "password": "admin1",
-      "role": "admin1",
+      "role": "menager",
       "email": "admin@example.com1",
       "account": "admin1",
-      "id": "d6ab"
+      "id": "2"
     },
     {
-      "id": "3c02",
+      "id": "4",
       "username": "111",
       "password": "111",
-      "email": "1111",
-      "role": "admin1"
+      "email": "111",
+      "role": "costumer",
+      "allValues": {
+        "username": "111",
+        "password": "111",
+        "email": "111",
+        "role": "costumer"
+      }
     },
     {
-      "id": "845e",
-      "username": "111",
-      "password": "111",
-      "email": "1111",
-      "role": "admin1"
+      "id": "5",
+      "username": "222",
+      "password": "222",
+      "email": "221",
+      "role": "menager",
+      "allValues": {
+        "username": "222",
+        "password": "222",
+        "email": "221",
+        "role": "menager"
+      }
+    },
+    {
+      "id": "a25c",
+      "username": "333",
+      "password": "333",
+      "email": "33312",
+      "role": "menager"
+    }
+  ],
+  "roles": [
+    {
+      "name": "menager",
+      "id": "1",
+      "permissions": [
+        "read",
+        "write"
+      ]
+    },
+    {
+      "name": "costumer",
+      "id": "2",
+      "permissions": [
+        "read"
+      ]
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "Product 1",
+      "price": 100,
+      "category": {
+        "id": 1,
+        "name": "Electronics"
+      }
+    },
+    {
+      "id": 2,
+      "name": "Product 2",
+      "price": 200,
+      "category": {
+        "id": 2,
+        "name": "Electronics"
+      }
+    },
+    {
+      "id": 3,
+      "name": "Product 3",
+      "price": 300,
+      "category": {
+        "id": 3,
+        "name": "Home"
+      }
+    },
+    {
+      "id": 4,
+      "name": "Product 4",
+      "price": 150,
+      "category": {
+        "id": 4,
+        "name": "Home"
+      }
     }
   ]
 }
